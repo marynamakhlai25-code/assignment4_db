@@ -5,7 +5,6 @@ import psycopg2
 from psycopg2.extras import execute_values
 from faker import Faker
 
-# Налаштування підключення до бази даних
 DB_CONFIG = {
     "host": "localhost",
     "port": "5432",
@@ -23,7 +22,6 @@ def fill_tennis_club():
     cursor = conn.cursor()
 
     try:
-        # 1. Генерація кортів
         print("Вставлення даних про корти")
         courts_data = [
             ("Центральний корт", "Grass", True),
@@ -39,7 +37,6 @@ def fill_tennis_club():
         cursor.execute("SELECT court_id FROM courts;")
         court_ids = [row[0] for row in cursor.fetchall()]
 
-        # 2. Генерація 2000 гравців
         print("Генерація 2000 гравців...")
         players_data = []
         levels = ['Beginner', 'Intermediate', 'Advanced', 'Pro']
@@ -61,7 +58,6 @@ def fill_tennis_club():
         cursor.execute("SELECT player_id FROM players;")
         player_ids = [row[0] for row in cursor.fetchall()]
 
-        # 3. Генерація 50 тренерів
         print("Генерація 50 тренерів")
         coaches_data = []
         specs = ['Junior Coaching', 'Tactics & Strategy', 'Physical Conditioning', 'Pro Level Training']
@@ -82,7 +78,6 @@ def fill_tennis_club():
         cursor.execute("SELECT coach_id FROM coaches;")
         coach_ids = [row[0] for row in cursor.fetchall()]
 
-        # 4. Генерація 510 000 бронювань (Bookings)
         print("Генерація 510 000 бронювань")
         bookings_data = []
         start_date = date(2023, 1, 1)
